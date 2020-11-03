@@ -1,0 +1,33 @@
+[CLaberinto]1++-1..*[CImagen]
+[CMundo]1++-1[CLaberinto]
+[CMundo]1++-1[CImagen]
+[CCorrupto]-.->[CAliado]
+[CAsesino]-.-[CJugador]
+[CJuego]1++-1[CMundo]
+[CJuego]1++-1..*[CAsesino]
+[CJuego]1++-1[CJugador]
+[CJuego]1++-1..*[CAliado]
+[CJuego]1++-1..*[CCorrupto]
+[CSprite]^-[CJugador]
+[CSprite]^-[CAliado]
+[CSprite]^-[CCorrupto]
+[CEntidad]-.->[CEntidad]
+[CEntidad]^-[CImagen]
+[CImagen]^-[CSprite]
+
+[CEntidad| #area_dibujo:Rectangle|+CEntidad(area:Rectangle);+Mostrar(Graphics g):virtual void;+Colision(CEntidad otro):bool]
+
+[CImagen|#img: Bitmap; -imagen_propia:bool|+CImagen(ruta:String,area_dibujo:Rectangle);+CImagen(img:Bitmap, area_dibujo:Rectangle);+~CImagen();+Mostrar(Graphics g):void]
+
+[CSprite|-dy:short;-dx:short;-n_filas:short;-n_columnas:short;-indicec:short;-indicef:short|+CSprite(ruta:String, area_dibujo:Rectangle,n_f:short, n_c:short,dx:short,dy:short);+CSprite(imagen:Bitmap, area_dibujo:Rectangle,n_f:short, n_c:short);+Animar(Graphics g):void;+SetUbicacion(x:short, y:short):void;#Mostrar():void;#Mover():virtual void;-AreadeRecorte():Rectangle]
+[CLaberinto|celdas:List\<CImagen\>|+CLaberinto();+Mostrar():void]
+[CMundo|-fondo:CImagen;-laberinto:CLaberinto|+Mostrar(Graphics g):void]
+[CJugador|-n_vidas:short|CJugador(vidas:short);+GetVidas():short]
+
+[CAliado||+CAlidado(); +Mover(x:short,y:short):void]
+
+[CCorrupto||+CCorrupto(); +Mover(x:short,y:short):void]
+
+[CAsesino||+CAsesino();+Mover(x:short,y:short):void]
+
+[CJuego|-principal: CJugador;-asesino: :List\<CAsesino\>;-aliados::List\<CAliado\>;-corrupto::List\<CCorrupto\>;-monedas:List\<CImagen\>;-puntos:int|+ Juego();+~Juego();+Jugar():bool;+GetPuntos():int]
