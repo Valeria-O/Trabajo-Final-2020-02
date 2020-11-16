@@ -87,11 +87,11 @@ public:
         } while (GetEsPared(i, j));
         return Rectangle(25 + (i* lado), 70 + (j * lado), lado, lado);
     }
-    void CavarParedes(int x, int y) //accepts only inputs with at least one even number
+    void CavarParedes(int x, int y) 
     {
         celdas[x][y].Cavar();
-        Direction direction = Direccion_a_moverse(x, y); //obtiene una direcciÛn v·lida para ir a la siguiente
-        if (direction == cerrado) //si no se encontrÛ ninguna direcciÛn, retrocedemos un paso en la recursividad
+        Direction direction = Direccion_a_moverse(x, y); //obtiene una direcci√≥n v√°lida para ir a la siguiente
+        if (direction == cerrado) //si no se encontr√≥ ninguna direcci√≥n, retrocedemos un paso en la recursividad
         {
             return;
         }
@@ -115,7 +115,7 @@ public:
             celdas[x][y + 1].Cavar();
             CavarParedes(x, y + 2);
         }
-        CavarParedes(x, y); //Esto es necesario al retroceder para comenzar a tallar nuevamente despuÈs de quedar atrapado en un callejÛn sin salida.
+        CavarParedes(x, y); //Esto es necesario al retroceder para comenzar a tallar nuevamente despu√©s de quedar atrapado en un callej√≥n sin salida.
     }
     bool GetEsPared(int i, int j) {
         return celdas[i][j].GetPared();
